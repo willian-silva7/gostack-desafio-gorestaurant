@@ -5,6 +5,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from './styles';
 import Modal from '../Modal';
 import Input from '../Input';
+import api from '../../services/api';
 
 interface IFoodPlate {
   id: number;
@@ -39,6 +40,15 @@ const ModalEditFood: React.FC<IModalProps> = ({
 
   const handleSubmit = useCallback(
     async (data: IEditFoodData) => {
+      const { name, price, description, image } = data;
+      await handleUpdateFood({
+        name,
+        description,
+        image,
+        price,
+      });
+      setIsOpen();
+
       // EDIT A FOOD PLATE AND CLOSE THE MODAL
     },
     [handleUpdateFood, setIsOpen],
